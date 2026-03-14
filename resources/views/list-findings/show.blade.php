@@ -12,12 +12,14 @@
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center">
                     <h1 class="text-3xl font-bold text-white">List Finding Details</h1>
-                    <div class="flex space-x-2">
-                        <a href="{{ route('list-findings.edit', $listFinding) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                            Edit
+                    <div class="flex space-x-2 items-center">
+                        <a href="{{ route('list-findings.edit', $listFinding) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-2 sm:px-4 rounded flex items-center">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            <span class="ml-2 hidden sm:inline">Edit</span>
                         </a>
-                        <a href="{{ route('list-findings.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                            Back to List
+                        <a href="{{ route('list-findings.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-2 sm:px-4 rounded flex items-center">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                            <span class="ml-2 hidden sm:inline">Back to List</span>
                         </a>
                     </div>
                 </div>

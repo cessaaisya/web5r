@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DailyActivity;
 use App\Models\ListFinding;
 
-class DashboardController extends Controller
+class StudentDashboardController extends Controller
 {
     public function index()
     {
@@ -41,7 +41,7 @@ class DashboardController extends Controller
             ->groupBy('progress')
             ->pluck('count', 'progress');
 
-        return view('dashboard', compact('data', 'abnormalityTrends', 'progressStats'));
+        return view('dashboard.student', compact('data', 'abnormalityTrends', 'progressStats'));
     }
 
     private function getDescription($category)

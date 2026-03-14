@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nim',
+        'no_reg',
     ];
 
     /**
@@ -54,5 +56,35 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->roles()->where('name', $role)->exists();
+    }
+
+    /**
+     * Get the display fields for this user based on their role
+     */
+    public function getDisplayFields()
+    {
+        $fields = ['name' => $this->name];
+
+        if ($this->hasRole('student')) {
+            $fields['NIM'] = $this->nim;
+        } elseif ($this->hasRole('management') || $this->hasRole('admin')) {
+            $fields['Registration Number'] = $this->no_reg;
+        }
+
+        return $fields;
+    }
+
+    /**
+     * Get user info as a formatted string based on role
+     */
+    public function getFormattedInfo()
+    {
+        if ($this->hasRole('student')) {
+            return "{$this->name} ({$this->nim})";
+        } elseif ($this->hasRole('management') || $this->hasRole('admin')) {
+            return "{$this->name} ({$this->no_reg})";
+        }
+
+        return $this->name;
     }
 }

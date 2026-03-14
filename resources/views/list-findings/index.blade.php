@@ -13,12 +13,14 @@
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center">
                     <h1 class="text-3xl font-bold text-white">List Findings</h1>
-                    <div class="flex space-x-2">
-                        <a href="{{ route('list-findings.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                            Add New
+                    <div class="flex space-x-2 items-center">
+                        <a href="{{ route('list-findings.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 sm:px-4 rounded flex items-center">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                            <span class="ml-2 hidden sm:inline">Add New</span>
                         </a>
-                        <a href="/dashboard" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500">
-                            <i class="fas fa-home mr-2"></i>Dashboard
+                        <a href="/dashboard" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-2 sm:px-4 rounded flex items-center focus:outline-none focus:ring-2 focus:ring-gray-500">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                            <span class="ml-2 hidden sm:inline">Dashboard</span>
                         </a>
                     </div>
                 </div>

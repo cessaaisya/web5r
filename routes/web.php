@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentDashboardController;
+use App\Http\Controllers\ManagementDashboardController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReportController;
@@ -20,8 +22,21 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::resource('reports', ReportController::class);
+    // Common authenticated routes (accessible to all roles)
     Route::resource('daily-activities', DailyActivityController::class);
     Route::resource('list-findings', ListFindingController::class);
+    Route::resource('reports', ReportController::class);
+
+    // Role-specific dashboard routes
+    Route::middleware('role:student')->group(function () {
+        Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('dashboard.student');
+    });
+
+    Route::middleware('role:management')->group(function () {
+        Route::get('/dashboard/management', [ManagementDashboardController::class, 'index'])->name('dashboard.management');
+    });
+
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin');
+    });
 });

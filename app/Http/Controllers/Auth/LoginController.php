@@ -15,18 +15,34 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credential = $request->input('credential');
+        $password = $request->input('password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/dashboard');
+        // Try to authenticate using nim or no_reg
+        $user = \App\Models\User::where('nim', $credential)
+            ->orWhere('no_reg', $credential)
+            ->first();
+
+        if ($user && \Illuminate\Support\Facades\Hash::check($password, $user->password)) {
+            Auth::login($user);
+
+            // Redirect based on role
+            if ($user->hasRole('admin')) {
+                return redirect()->route('dashboard.admin');
+            } elseif ($user->hasRole('management')) {
+                return redirect()->route('dashboard.management');
+            } else {
+                // Default to student dashboard
+                return redirect()->route('dashboard.student');
+            }
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->withErrors(['credential' => 'Invalid NIM/Registration Number or Password']);
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect()->route('login');
     }
 }

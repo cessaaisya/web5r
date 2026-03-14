@@ -12,8 +12,9 @@
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center">
                     <h1 class="text-3xl font-bold text-white">Edit Daily Activity</h1>
-                    <a href="{{ route('daily-activities.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                        Back to List
+                    <a href="{{ route('daily-activities.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-2 sm:px-4 rounded flex items-center">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                        <span class="ml-2 hidden sm:inline">Back to List</span>
                     </a>
                 </div>
             </div>
@@ -87,7 +88,7 @@
                                         </div>
                                         
                                         <div id="camera-container" style="display: none;" class="mb-2">
-                                            <video id="camera-feed" autoplay playsinline class="border border-gray-300 rounded w-full max-w-md"></video>
+                                            <video id="camera-feed" autoplay playsinline style="transform: scaleX(-1);" class="border border-gray-300 rounded w-full max-w-md"></video>
                                             <canvas id="photo-canvas" style="display: none;" class="border border-gray-300 rounded w-full max-w-md"></canvas>
                                         </div>
                                         
